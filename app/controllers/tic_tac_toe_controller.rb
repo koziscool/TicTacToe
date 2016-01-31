@@ -1,3 +1,4 @@
+
 class TicTacToeController < ApplicationController
 
   def new
@@ -21,12 +22,7 @@ class TicTacToeController < ApplicationController
 
     @board_arr = @board.board_arr
 
-    if @board.winning_combination?(@current_player)
-      @game_over = "Game over, player #{@current_player} WINS!"
-    elsif @board.full?
-      @game_over = "Game Over! You've drawn."
-    end
-
+    @game_over = game_over_message
 
     switch_player
     save_player
@@ -61,5 +57,14 @@ class TicTacToeController < ApplicationController
   def retrieve_coordinates
     params[:move].split(",").map(&:to_i)
   end
+
+  def game_over_message
+    if @board.winning_combination?(@current_player)
+      @game_over = "Game over, player #{@current_player} WINS!"
+    elsif @board.full?
+      @game_over = "Game Over! You've drawn."
+    end
+  end
+
 
 end
