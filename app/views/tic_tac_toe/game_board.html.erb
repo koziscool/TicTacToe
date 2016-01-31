@@ -20,13 +20,13 @@
 </pre>
 
 
-<%= form_tag(root_path, :method => "POST") do %>
+<%= form_tag( make_move_path, :method => "POST" ) do %>
   <table>
     <% 3.times do |row| %>
       <tr> 
         <% 3.times do |cell| %>
           <td>
-            <%= radio_button_tag("move","#") %>
+            <%= radio_button_tag("move","#{row}, #{cell}") %>
           </td>
         <% end %>
       </tr>

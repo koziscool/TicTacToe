@@ -16,6 +16,11 @@ class TicTacToeController < ApplicationController
 
     #todo logic for player move
 
+    @board = Board.new( retrieve_board_arr )
+    @board.add_piece( retrieve_coordinates, @current_player )
+
+    @board_arr = @board.board_arr
+
     switch_player
     save_player
     save_board_arr
@@ -46,6 +51,8 @@ class TicTacToeController < ApplicationController
     session[ :saved_board_arr ]
   end
 
-
+  def retrieve_coordinates
+    params[:move].split(",").map(&:to_i)
+  end
 
 end
