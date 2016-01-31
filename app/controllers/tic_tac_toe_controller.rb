@@ -21,6 +21,13 @@ class TicTacToeController < ApplicationController
 
     @board_arr = @board.board_arr
 
+    if @board.winning_combination?(@current_player)
+      @game_over = "Game over, player #{@current_player} WINS!"
+    elsif @board.full?
+      @game_over = "Game Over! You've drawn."
+    end
+
+
     switch_player
     save_player
     save_board_arr
@@ -40,7 +47,7 @@ class TicTacToeController < ApplicationController
   end
 
   def switch_player
-    @current_player = 'X' ? 'O' : 'X'
+    @current_player = (@current_player == 'X' ? 'O' : 'X')
   end
 
   def save_board_arr
