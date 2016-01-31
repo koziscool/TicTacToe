@@ -40,7 +40,12 @@
         <tr> 
           <% 3.times do |cell| %>
             <td>
-              <%= radio_button_tag("move","#{row}, #{cell}") %>
+              <% disabled = @board_arr[row][cell] %>
+              <%= radio_button_tag( "move",
+                    "#{row},#{cell}",
+                    !disabled,
+                    :disabled => disabled) 
+              %>
             </td>
           <% end %>
         </tr>
